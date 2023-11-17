@@ -4,6 +4,7 @@ import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
+import lotto.dto.LottoNumberDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,7 +20,7 @@ public class WinningNumberTest {
     @Test
     void 보너스번호_당첨번호_중복_예외처리_테스트() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(2);
+        BonusNumber bonusNumber = new BonusNumber(new LottoNumberDTO(2));
         assertThat(lotto.contains(bonusNumber)).isTrue();
         assertThatThrownBy(() -> new WinningNumber(lotto, bonusNumber)).isInstanceOf(IllegalArgumentException.class);
     }
@@ -28,7 +29,7 @@ public class WinningNumberTest {
     @MethodSource("generateInput")
     void 당첨번호갯수_보너스포함여부_등수_계산_테스트(List<Integer> lottoNumbers, int bonus, String result) {
         Lotto winningLotto = new Lotto(lottoNumbers);
-        BonusNumber bonusNumber = new BonusNumber(bonus);
+        BonusNumber bonusNumber = new BonusNumber(new LottoNumberDTO(bonus));
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
@@ -39,7 +40,7 @@ public class WinningNumberTest {
     @Test
     void 등수_카운트_테스트() {
         Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6));
-        BonusNumber bonusNumber = new BonusNumber(10);
+        BonusNumber bonusNumber = new BonusNumber(new LottoNumberDTO(10));
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));

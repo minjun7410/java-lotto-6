@@ -1,6 +1,7 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import lotto.dto.LottoNumberDTO;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,25 +14,26 @@ public class InputView {
         return Console.readLine().trim();
     }
 
-    public static List<Integer> getLottoNumbersInput() {
+    public static List<LottoNumberDTO> getLottoNumbersInput() {
         String userInput = getUserInput();
         return Arrays.stream(userInput.split(","))
                 .map(String::trim)
-                .map(InputView::convertInputToNumber)
+                .map(InputView::convertInputToLottoNumber)
+                .map(LottoNumberDTO::new)
                 .toList();
     }
 
     public static int getPaidMoneyInput() {
         String userInput = getUserInput();
-        return convertInputToNumber(userInput);
+        return convertInputToLottoNumber(userInput);
     }
 
-    public static int getBonusNumberInput() {
+    public static LottoNumberDTO getBonusNumberInput() {
         String userInput = getUserInput();
-        return convertInputToNumber(userInput);
+        return new LottoNumberDTO(convertInputToLottoNumber(userInput));
     }
 
-    private static int convertInputToNumber(String input) {
+    private static int convertInputToLottoNumber(String input) {
         validateInputNumber(input);
         validateExceedMaximum(input);
         return Integer.parseInt(input);

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoNumberDTO;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +15,12 @@ public class Lotto {
         validate(numbers);
         validateDuplicatedNumber(numbers);
         this.numbers = numbers;
+    }
+
+    public static Lotto fromLottoNumberDTO(List<LottoNumberDTO> numbers) {
+        return new Lotto(numbers.stream()
+                .map(LottoNumberDTO::getNumber)
+                .toList());
     }
 
     public boolean contains(Object obj) {
