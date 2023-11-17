@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.YieldRate;
+import lotto.dto.LottoNumberDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +23,12 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.forEach((lotto) -> {
-            String lottoNumbers = lotto.getNumbers().stream()
-                    .map(Object::toString)
-                    .collect(Collectors.joining(", "));
-            System.out.printf(LOTTO_NUMBERS_TEXT, lottoNumbers);
-        });
+    public static void printLottoNumbers(List<LottoNumberDTO> lottoNumbers) {
+        String lottoNumberText = lottoNumbers.stream()
+                .map(LottoNumberDTO::getNumber)
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+        System.out.printf(LOTTO_NUMBERS_TEXT, lottoNumberText);
         System.out.println();
     }
 

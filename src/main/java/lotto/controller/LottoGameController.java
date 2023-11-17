@@ -27,7 +27,7 @@ public class LottoGameController {
                 int paidMoneyInput = InputView.getPaidMoneyInput();
                 LottoTicket lottoTicket = lottoOwner.purchaseLotto(paidMoneyInput);
                 OutputView.printTicketNumber(lottoTicket);
-                OutputView.printLottoNumbers(lottoOwner.getLottos());
+                printLottos(lottoOwner.getLottos());
                 return;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
@@ -73,6 +73,10 @@ public class LottoGameController {
     private void calculateLottoResult(LottoOwner lottoOwner, WinningNumber winningNumber) {
         lottoOwner.calculateResult(winningNumber);
         printLottoResult();
+    }
+
+    private void printLottos(List<Lotto> lottos) {
+        lottos.forEach((lotto) -> OutputView.printLottoNumbers(lotto.getNumbers()));
     }
 
     private void printLottoResult() {

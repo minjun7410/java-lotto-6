@@ -41,8 +41,10 @@ public class Lotto {
         return matchCount;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoNumberDTO> getNumbers() {
+        return numbers.stream()
+                .map(number -> new LottoNumberDTO(number))
+                .toList();
     }
 
     private void validateDuplicatedNumber(List<Integer> numbers) {
