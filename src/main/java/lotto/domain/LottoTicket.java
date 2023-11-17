@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.TicketNumberDTO;
 import lotto.util.Utils;
 
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class LottoTicket {
         return lottos;
     }
 
-    public int getTicketNumber() {
-        return ticketNumber;
+    public TicketNumberDTO getTicketNumber() {
+        return new TicketNumberDTO(ticketNumber);
     }
 
     private void validateIsDivided(int paid) {

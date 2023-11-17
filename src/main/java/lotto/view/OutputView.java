@@ -5,6 +5,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.YieldRate;
 import lotto.dto.LottoNumberDTO;
+import lotto.dto.TicketNumberDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,10 +41,9 @@ public class OutputView {
         System.out.print(PURCHASE_PRICE_INPUT_TEXT);
     }
 
-    public static void printTicketNumber(LottoTicket lottoTicket) {
+    public static void printTicketNumber(TicketNumberDTO ticketNumberDTO) {
         System.out.println();
-        System.out.printf(TICKET_NUMBER_TEXT, lottoTicket.getTicketNumber()
-        );
+        System.out.printf(TICKET_NUMBER_TEXT, ticketNumberDTO.getTicketNumber());
     }
 
     public static void printLottoNumbersInputText() {
