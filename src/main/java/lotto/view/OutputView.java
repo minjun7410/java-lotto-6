@@ -5,6 +5,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.YieldRate;
 import lotto.dto.LottoNumberDTO;
+import lotto.dto.RankDTO;
 import lotto.dto.TicketNumberDTO;
 
 import java.util.List;
@@ -61,8 +62,8 @@ public class OutputView {
         System.out.print(BOUNDARY);
     }
 
-    public static void printLottoResult(Rank rank) {
-        System.out.printf(rank.getPrizeText(), rank.getCount());
+    public static void printLottoResult(RankDTO rank) {
+        System.out.printf(rank.getPrizeText(), rank.getWinningCount());
     }
 
     public static void printYieldRate(YieldRate yieldRate) {

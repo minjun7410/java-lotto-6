@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.*;
 import lotto.dto.LottoNumberDTO;
+import lotto.dto.RankDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -81,9 +82,9 @@ public class LottoGameController {
 
     private void printLottoResult() {
         OutputView.printLottoResultStartText();
-        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+        List<RankDTO> ranks = Rank.getRanks();
         Collections.reverse(ranks);
-        for (Rank rank : ranks) {
+        for (RankDTO rank : ranks) {
             OutputView.printLottoResult(rank);
         }
     }

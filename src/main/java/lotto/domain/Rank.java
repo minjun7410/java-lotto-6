@@ -1,5 +1,11 @@
 package lotto.domain;
 
+import lotto.dto.RankDTO;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
     FIRST(6, false, 0, 2000000000, "6개 일치 (2,000,000,000원) - %d개\n"),
     SECOND(5, true, 0, 30000000, "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개\n"),
@@ -31,16 +37,18 @@ public enum Rank {
         return Rank.FAIL;
     }
 
+    public static List<RankDTO> getRanks() {
+        return Arrays.stream(values())
+                .map(Rank::getRank)
+                .collect(Collectors.toList());
+    }
+
     public void addCount() {
         this.winningCount += 1;
     }
 
-    public int getCount() {
-        return this.winningCount;
-    }
-
-    public String getPrizeText() {
-        return this.prizeText;
+    private RankDTO getRank() {
+        return new RankDTO(this.winningCount, this.prizeText);
     }
 
     public int getPrize() {

@@ -46,7 +46,7 @@ public class WinningNumberTest {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
 
         Rank rank = winningNumber.calculateRank(lotto);
-        assertThat(rank.getCount()).isEqualTo(1);
+        assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
     private static Stream<Arguments> generateInput() {
