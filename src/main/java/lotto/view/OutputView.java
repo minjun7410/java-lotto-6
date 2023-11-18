@@ -7,6 +7,7 @@ import lotto.domain.YieldRate;
 import lotto.dto.LottoNumberDTO;
 import lotto.dto.RankDTO;
 import lotto.dto.TicketNumberDTO;
+import lotto.dto.YieldRateDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +67,7 @@ public class OutputView {
         System.out.printf(rank.getPrizeText(), rank.getWinningCount());
     }
 
-    public static void printYieldRate(YieldRate yieldRate) {
+    public static void printYieldRate(YieldRateDTO yieldRate) {
         System.out.printf(YIELD_RATE_TEXT, yieldRate.getYieldRate());
     }
 }

@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.*;
 import lotto.dto.LottoNumberDTO;
 import lotto.dto.RankDTO;
+import lotto.dto.YieldRateDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -91,6 +92,6 @@ public class LottoGameController {
 
     private void calculateYieldRate(LottoOwner lottoOwner) {
         YieldRate yieldRate = lottoOwner.calculateYieldRate();
-        OutputView.printYieldRate(yieldRate);
+        OutputView.printYieldRate(YieldRateDTO.from(yieldRate));
     }
 }
