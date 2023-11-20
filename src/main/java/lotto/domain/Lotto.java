@@ -9,6 +9,7 @@ import java.util.Set;
 public class Lotto {
     private static final String WRONG_LOTTO_NUMBER_MESSAGE = "6개의 로또 숫자를 입력하세요.";
     private static final String DUPLICATE_LOTTO_NUMBER_MESSAGE = "중복되지 않은 로또 숫자를 입력해주세요.";
+    private static final int MAX_LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -28,7 +29,7 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != MAX_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(WRONG_LOTTO_NUMBER_MESSAGE);
         }
     }
