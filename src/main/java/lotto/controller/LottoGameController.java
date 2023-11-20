@@ -14,6 +14,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGameController {
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public LottoGameController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
     public void play() {
         LottoOwner lottoOwner = new LottoOwner();
         purchaseLottoByOwner(lottoOwner);
@@ -25,14 +33,14 @@ public class LottoGameController {
     private void purchaseLottoByOwner(LottoOwner lottoOwner) {
         while (true) {
             try {
-                OutputView.printPurchasePriceInputText();
-                int paidMoneyInput = InputView.getPaidMoneyInput();
+                outputView.printPurchasePriceInputText();
+                int paidMoneyInput = inputView.getPaidMoneyInput();
                 LottoTicket lottoTicket = lottoOwner.purchaseLotto(paidMoneyInput);
-                OutputView.printTicketNumber(lottoTicket.getTicketNumber());
+                outputView.printTicketNumber(lottoTicket.getTicketNumber());
                 printLottos(lottoOwner.getLottos());
                 return;
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                outputView.printErrorMessage(e.getMessage());
             }
         }
     }
@@ -44,7 +52,7 @@ public class LottoGameController {
                 BonusNumber bonusNumber = generateBonusNumber();
                 return new WinningNumber(lottoNumber, bonusNumber);
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                outputView.printErrorMessage(e.getMessage());
             }
         }
     }
@@ -52,11 +60,11 @@ public class LottoGameController {
     private Lotto generateLottoNumber() {
         while (true) {
             try {
-                OutputView.printLottoNumbersInputText();
-                List<LottoNumberDTO> lottoNumbers = InputView.getLottoNumbersInput();
+                outputView.printLottoNumbersInputText();
+                List<LottoNumberDTO> lottoNumbers = inputView.getLottoNumbersInput();
                 return Lotto.fromLottoNumberDTO(lottoNumbers);
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                outputView.printErrorMessage(e.getMessage());
             }
         }
     }
@@ -64,10 +72,10 @@ public class LottoGameController {
     private BonusNumber generateBonusNumber() {
         while (true) {
             try {
-                OutputView.printBonusNumberInputText();
-                return new BonusNumber(InputView.getBonusNumberInput());
+                outputView.printBonusNumberInputText();
+                return new BonusNumber(inputView.getBonusNumberInput());
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                outputView.printErrorMessage(e.getMessage());
             }
         }
     }
@@ -78,20 +86,20 @@ public class LottoGameController {
     }
 
     private void printLottos(List<Lotto> lottos) {
-        lottos.forEach((lotto) -> OutputView.printLottoNumbers(lotto.getNumbers()));
+        lottos.forEach((lotto) -> outputView.printLottoNumbers(lotto.getNumbers()));
     }
 
     private void printLottoResult() {
-        OutputView.printLottoResultStartText();
+        outputView.printLottoResultStartText();
         List<RankDTO> ranks = Rank.getRanks();
         Collections.reverse(ranks);
         for (RankDTO rank : ranks) {
-            OutputView.printLottoResult(rank);
+            outputView.printLottoResult(rank);
         }
     }
 
     private void calculateYieldRate(LottoOwner lottoOwner) {
         YieldRate yieldRate = lottoOwner.calculateYieldRate();
-        OutputView.printYieldRate(YieldRateDTO.from(yieldRate));
+        outputView.printYieldRate(YieldRateDTO.from(yieldRate));
     }
 }
