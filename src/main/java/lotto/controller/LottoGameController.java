@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
 import lotto.domain.*;
 import lotto.dto.LottoNumberDTO;
 import lotto.dto.RankDTO;
@@ -8,8 +7,6 @@ import lotto.dto.YieldRateDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,53 +28,57 @@ public class LottoGameController {
     }
 
     private void purchaseLottoByOwner(LottoOwner lottoOwner) {
-        while (true) {
+        boolean isLottoPurchased = false;
+        do {
             try {
                 outputView.printPurchasePriceInputText();
                 int paidMoneyInput = inputView.getPaidMoneyInput();
                 LottoTicket lottoTicket = lottoOwner.purchaseLotto(paidMoneyInput);
+                isLottoPurchased = true;
                 outputView.printTicketNumber(lottoTicket.getTicketNumber());
                 printLottos(lottoOwner.getLottos());
-                return;
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
-        }
+        } while (!isLottoPurchased);
     }
 
     private WinningNumber generateWinningNumber() {
         Lotto lottoNumber = generateLottoNumber();
-        while (true) {
+
+        WinningNumber winningNumber = null;
+        boolean isBonusGenerated = false;
+        do {
             try {
                 BonusNumber bonusNumber = generateBonusNumber();
-                return new WinningNumber(lottoNumber, bonusNumber);
+                isBonusGenerated = true;
+                winningNumber = new WinningNumber(lottoNumber, bonusNumber);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
-        }
+        } while (!isBonusGenerated);
+        return winningNumber;
     }
 
     private Lotto generateLottoNumber() {
-        while (true) {
+        Lotto lotto = null;
+        boolean isLottoGenerated = false;
+        do {
             try {
                 outputView.printLottoNumbersInputText();
                 List<LottoNumberDTO> lottoNumbers = inputView.getLottoNumbersInput();
-                return Lotto.fromLottoNumberDTO(lottoNumbers);
+                isLottoGenerated = true;
+                lotto = Lotto.fromLottoNumberDTO(lottoNumbers);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
-        }
+        } while (!isLottoGenerated);
+        return lotto;
     }
 
     private BonusNumber generateBonusNumber() {
-        while (true) {
-            try {
-                outputView.printBonusNumberInputText();
-                return new BonusNumber(inputView.getBonusNumberInput());
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
-        }
+        outputView.printBonusNumberInputText();
+        return new BonusNumber(inputView.getBonusNumberInput());
     }
 
     private void calculateLottoResult(LottoOwner lottoOwner, WinningNumber winningNumber) {
