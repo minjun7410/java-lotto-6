@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constants.ErrorMessage;
 import lotto.dto.LottoNumberDTO;
 
 import java.util.HashSet;
@@ -7,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final String WRONG_LOTTO_NUMBER_MESSAGE = "6개의 로또 숫자를 입력하세요.";
-    private static final String DUPLICATE_LOTTO_NUMBER_MESSAGE = "중복되지 않은 로또 숫자를 입력해주세요.";
     private static final int MAX_LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> numbers;
 
@@ -30,7 +29,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers.size() != MAX_LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(WRONG_LOTTO_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(ErrorMessage.WRONG_LOTTO_NUMBER_MESSAGE.toString());
         }
     }
 
@@ -51,6 +50,6 @@ public class Lotto {
     private void validateDuplicatedNumber(List<Integer> numbers) {
         Set<Integer> kindOfNumber = new HashSet<>(numbers);
         if (kindOfNumber.size() == numbers.size()) return;
-        throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER_MESSAGE);
+        throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER_MESSAGE.toString());
     }
 }

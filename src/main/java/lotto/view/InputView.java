@@ -1,15 +1,13 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import lotto.constants.ErrorMessage;
 import lotto.dto.LottoNumberDTO;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class InputView {
-    private static final String INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요.";
-    private static final String TOO_MANY_MONEY_MESSAGE = "너무 큰 금액을 입력했습니다.";
-
     private String getUserInput() {
         return Console.readLine().trim();
     }
@@ -41,12 +39,12 @@ public class InputView {
 
     private void validateInputNumber(String input) {
         if (input.matches("\\d*")) return;
-        throw new IllegalArgumentException(INPUT_NUMBER_MESSAGE);
+        throw new IllegalArgumentException(ErrorMessage.INPUT_NUMBER_MESSAGE.toString());
     }
 
     private void validateExceedMaximum(String input) {
         if (input.length() <= 10 && Long.parseLong(input) <= Integer.MAX_VALUE) return;
-        throw new IllegalArgumentException(TOO_MANY_MONEY_MESSAGE);
+        throw new IllegalArgumentException(ErrorMessage.TOO_MANY_MONEY_MESSAGE.toString());
     }
 }
 
