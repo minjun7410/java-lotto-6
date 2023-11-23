@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constants.Constants;
 import lotto.constants.ErrorMessage;
 import lotto.dto.LottoNumberDTO;
 
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int MAX_LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -28,7 +28,7 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != MAX_LOTTO_NUMBER_COUNT) {
+        if (numbers.size() != Constants.MAXIMUM_LOTTO_NUMBER_COUNT.getNumber()) {
             throw new IllegalArgumentException(ErrorMessage.WRONG_LOTTO_NUMBER_MESSAGE.toString());
         }
     }

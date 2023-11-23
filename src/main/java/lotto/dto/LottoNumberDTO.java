@@ -1,10 +1,9 @@
 package lotto.dto;
 
+import lotto.constants.Constants;
 import lotto.constants.ErrorMessage;
 
 public class LottoNumberDTO {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private final int number;
 
     public LottoNumberDTO(int number) {
@@ -17,7 +16,7 @@ public class LottoNumberDTO {
     }
 
     private void validateNumberRange(int number) {
-        if (number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER) return;
+        if (number >= Constants.MINIMUM_LOTTO_NUMBER.getNumber() && number <= Constants.MAXIMUM_LOTTO_NUMBER.getNumber()) return;
         throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR_TEXT.toString());
     }
 }
